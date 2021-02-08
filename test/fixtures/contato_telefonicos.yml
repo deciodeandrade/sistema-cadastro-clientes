@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  telefone_fixo: MyString
+  ramal: MyString
+  telefone_celular: MyString
+  responsavel: one
+
+two:
+  telefone_fixo: MyString
+  ramal: MyString
+  telefone_celular: MyString
+  responsavel: two

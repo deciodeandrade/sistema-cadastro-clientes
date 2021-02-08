@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Contato Telefonicos</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Telefone fixo</th>
+      <th>Ramal</th>
+      <th>Telefone celular</th>
+      <th>Responsavel</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @contato_telefonicos.each do |contato_telefonico| %>
+      <tr>
+        <td><%= contato_telefonico.telefone_fixo %></td>
+        <td><%= contato_telefonico.ramal %></td>
+        <td><%= contato_telefonico.telefone_celular %></td>
+        <td><%= contato_telefonico.responsavel %></td>
+        <td><%= link_to 'Show', contato_telefonico %></td>
+        <td><%= link_to 'Edit', edit_contato_telefonico_path(contato_telefonico) %></td>
+        <td><%= link_to 'Destroy', contato_telefonico, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Contato Telefonico', new_contato_telefonico_path %>

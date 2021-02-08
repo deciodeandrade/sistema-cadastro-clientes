@@ -7,7 +7,6 @@ class CreateClientes < ActiveRecord::Migration[5.2]
       t.string :inscricao_estadual
       t.string :inscricao_municipal
       t.references :endereco, foreign_key: true
-      t.references :responsavel, foreign_key: true
 
       t.timestamps
     end

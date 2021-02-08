@@ -1,3 +1,4 @@
 class Responsavel < ApplicationRecord
-  has_one :cliente
+  belongs_to :cliente
+  has_many :contato_telefonicos
 end

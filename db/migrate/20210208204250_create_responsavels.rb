@@ -4,9 +4,7 @@ class CreateResponsavels < ActiveRecord::Migration[5.2]
       t.string :nome
       t.string :cargo
       t.string :email
-      t.string :telefone_fixo
-      t.string :ramal
-      t.string :telefone_celular
+      t.references :cliente, foreign_key: true
 
       t.timestamps
     end

@@ -4,14 +4,10 @@ one:
   nome: MyString
   cargo: MyString
   email: MyString
-  telefone_fixo: MyString
-  ramal: MyString
-  telefone_celular: MyString
+  cliente: one
 
 two:
   nome: MyString
   cargo: MyString
   email: MyString
-  telefone_fixo: MyString
-  ramal: MyString
-  telefone_celular: MyString
+  cliente: two

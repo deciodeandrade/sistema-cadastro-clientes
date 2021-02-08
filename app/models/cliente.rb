@@ -1,4 +1,4 @@
 class Cliente < ApplicationRecord
   belongs_to :endereco
-  belongs_to :responsavel
+  has_many :responsavels
 end

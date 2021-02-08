@@ -7,7 +7,6 @@ one:
   inscricao_estadual: MyString
   inscricao_municipal: MyString
   endereco: one
-  responsavel: one
 
 two:
   cnpj: MyString
@@ -16,4 +15,3 @@ two:
   inscricao_estadual: MyString
   inscricao_municipal: MyString
   endereco: two
-  responsavel: two
