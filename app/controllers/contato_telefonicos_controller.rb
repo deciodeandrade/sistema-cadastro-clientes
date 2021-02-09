@@ -6,6 +6,18 @@ class ContatoTelefonicosController < ApplicationController
   def index
     contato_telefonicos = ContatoTelefonico.all
 
+    contato_telefonicos = contato_telefonicos.map do |contato_telefonico| {
+
+      id: contato_telefonico.id,
+      telefone_fixo: contato_telefonico.telefone_fixo,
+      ramal: contato_telefonico.ramal,
+      telefone_celular: contato_telefonico.telefone_celular,
+      responsavel_id: contato_telefonico.responsavel_id,
+      responsavel: contato_telefonico.responsavel.nome,
+
+    }
+    end
+
     respond_to do |format|
       msg = {
         body: {

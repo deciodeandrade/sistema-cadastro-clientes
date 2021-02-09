@@ -6,6 +6,21 @@ class ClientesController < ApplicationController
   def index
     clientes = Cliente.all
 
+    clientes = clientes.map do |cliente| {
+
+      id: cliente.id,
+      cnpj: cliente.cnpj,
+      endereco_id: cliente.endereco_id,
+      endereco: cliente.endereco.bairro,
+      inscricao_estadual: cliente.inscricao_estadual,
+      inscricao_municipal: cliente.inscricao_municipal,
+      nome_fantasia: cliente.nome_fantasia,
+      razao_social: cliente.razao_social,
+
+    }
+    end
+
+
     respond_to do |format|
       msg = {
         body: {

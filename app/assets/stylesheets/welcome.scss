@@ -10,3 +10,28 @@ footer div a:hover{
 footer.footer{
   margin-top: 500px;
 }
+
+#bem_vindo{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-top: 200px;
+  font-size: 100px;
+}
+
+header{
+  vertical-align: center;
+  height: 60px;
+  padding: 0px;
+
+  z-index: 1000;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+}
+
+#section-conteudo{
+  margin-top: 80px;
+}

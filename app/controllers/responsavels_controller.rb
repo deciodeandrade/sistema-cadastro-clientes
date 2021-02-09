@@ -6,6 +6,18 @@ class ResponsavelsController < ApplicationController
   def index
     responsavels = Responsavel.all
 
+    responsavels = responsavels.map do |responsavel| {
+
+      id: responsavel.id,
+      nome: responsavel.nome,
+      email: responsavel.email,
+      cliente_id: responsavel.cliente_id,
+      cliente: responsavel.cliente.nome_fantasia,
+      cargo: responsavel.cargo,
+
+    }
+    end
+
     respond_to do |format|
       msg = {
         body: {

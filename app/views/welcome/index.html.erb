@@ -39,9 +39,9 @@
 
     </nav>
 </header>
-<section>
+<section id="section-conteudo">
   <div id="conteudo" class="container">
-
+    <h1 id="bem_vindo">Bem-Vindo!</h1>
   </div>
 </section>
 <footer class="footer">
@@ -106,7 +106,7 @@
   }
 
   function show_welcome(){
-      document.getElementById('conteudo').innerHTML = `<h1>Bem-Vindo!</h1>`;
+      document.getElementById('conteudo').innerHTML = `<h1 id="bem_vindo">Bem-Vindo!</h1>`;
   }
 
   function criar_table_enderecos(enderecos){
@@ -134,7 +134,7 @@
 
         <br>
 
-        <a href="/enderecos/new">New Endereços</a>
+        <a class="button is-info" href="/enderecos/new">Novo Endereço</a>
       `
       let corpo_table_enderecos = '';
 
@@ -148,9 +148,9 @@
                 <td>${endereco.cidade}</td>
                 <td>${endereco.estado}</td>
                 <td>${endereco.cep}</td>
-                <td><a href="/enderecos/${endereco.id}">Show</a></td>
-                <td><a href="/enderecos/${endereco.id}/edit">Edit</a></td>
-                <td><a onclick="delete_element('/enderecos/${endereco.id}')">Destroy</a></td>
+                <td><a class="button is-primary" href="/enderecos/${endereco.id}">Visualizar</a></td>
+                <td><a class="button is-link" href="/enderecos/${endereco.id}/edit">Editar</a></td>
+                <td><a class="button is-danger" onclick="delete_element('/enderecos/${endereco.id}')">Excluir</a></td>
               </tr>
       `
       });
@@ -183,7 +183,7 @@
 
         <br>
 
-        <a href="/clientes/new">New Clientes</a>
+        <a class="button is-info" href="/clientes/new">Novo Cliente</a>
       `
       let corpo_table_clientes = '';
 
@@ -195,10 +195,10 @@
                 <td>${cliente.nome_fantasia}</td>
                 <td>${cliente.inscricao_estadual}</td>
                 <td>${cliente.inscricao_municipal}</td>
-                <td>${cliente.endereco_id}</td>
-                <td><a href="/clientes/${cliente.id}">Show</a></td>
-                <td><a href="/clientes/${cliente.id}/edit">Edit</a></td>
-                <td><a onclick="delete_element('/clientes/${cliente.id}')">Destroy</a></td>
+                <td>${cliente.endereco}</td>
+                <td><a class="button is-primary" href="/clientes/${cliente.id}">Visualizar</a></td>
+                <td><a class="button is-link" href="/clientes/${cliente.id}/edit">Editar</a></td>
+                <td><a class="button is-danger" onclick="delete_element('/clientes/${cliente.id}')">Excluir</a></td>
               </tr>
           `
       });
@@ -209,7 +209,7 @@
 
   function criar_table_responsaveis(responsaveis){
       const table_responsaveis = `
-        <h1>Responsavels</h1>
+        <h1>Responsáveis</h1>
 
         <table class="table">
           <thead>
@@ -229,7 +229,7 @@
 
 <br>
 
-<a href="/responsavels/new">New Responsavel</a>
+<a class="button is-info" href="/responsavels/new">Novo Responsavel</a>
       `
       let corpo_table_responsaveis = '';
 
@@ -239,10 +239,10 @@
                 <td>${responsavel.nome}</td>
                 <td>${responsavel.cargo}</td>
                 <td>${responsavel.email}</td>
-                <td>${responsavel.cliente_id}</td>
-                <td><a href="/responsavels/${responsavel.id}">Show</a></td>
-                <td><a href="/responsavels/${responsavel.id}/edit">Edit</a></td>
-                <td><a onclick="delete_element('/responsavels/${responsavel.id}')">Destroy</a></td>
+                <td>${responsavel.cliente}</td>
+                <td><a  class="button is-primary" href="/responsavels/${responsavel.id}">Vizualizar</a></td>
+                <td><a class="button is-link" href="/responsavels/${responsavel.id}/edit">Editar</a></td>
+                <td><a class="button is-danger" onclick="delete_element('/responsavels/${responsavel.id}')">Excluir</a></td>
               </tr>
           `
       });
@@ -273,7 +273,7 @@
 
         <br>
 
-        <a href="/contato_telefonicos/new">New Contato Telefonico</a>
+        <a class="button is-info" href="/contato_telefonicos/new">Novo Contato Telefonico</a>
 
       `
       let corpo_table_contatos = '';
@@ -284,10 +284,10 @@
                 <td>${contato.telefone_fixo}</td>
                 <td>${contato.ramal}</td>
                 <td>${contato.telefone_celular}</td>
-                <td>${contato.responsavel_id}</td>
-                <td><a href="/contato_telefonicos/${contato.id}">Show</a></td>
-                <td><a href="/contato_telefonicos/${contato.id}/edit">Edit</a></td>
-                <td><a onclick="delete_element('/contato_telefonicos/${contato.id}')">Destroy</a></td>
+                <td>${contato.responsavel}</td>
+                <td><a  class="button is-primary" href="/contato_telefonicos/${contato.id}">Visualizar</a></td>
+                <td><a class="button is-link" href="/contato_telefonicos/${contato.id}/edit">Editar</a></td>
+                <td><a class="button is-danger" onclick="delete_element('/contato_telefonicos/${contato.id}')">Excluir</a></td>
               </tr>
           `
       });
