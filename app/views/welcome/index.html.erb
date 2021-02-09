@@ -1,0 +1,298 @@
+<header>
+    <nav class="navbar menu is-danger" role="navigation" aria-label="main navigation">
+      <div class="navbar-brand">
+        <a id="nome_logo_id" class="navbar-item item-logo">CADASTRO</a>
+        <a role="button" id="navbarBurger_id" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navMenuIndex">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+      </div>
+
+      <div class="navbar-end">
+        <div id="navMenuDocumentation_id" class="navbar-menu">
+          <div id="navbarStartOriginal_id" class="navbar-start bd-navbar-start bd-is-original">
+            <div class="navbar-end">
+              <a id="link_menu_home_id" onclick="show_welcome()" class="navbar-item">
+                Home
+              </a>
+
+              <a onclick="render_all('/clientes')" class="navbar-item">
+                Clientes
+              </a>
+
+              <a onclick="render_all('/enderecos')" class="navbar-item">
+                Endereços
+              </a>
+
+              <a onclick="render_all('/responsavels')" class="navbar-item">
+                Responsáveis
+              </a>
+
+              <a onclick="render_all('/contato_telefonicos')" class="navbar-item">
+                Contatos
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </nav>
+</header>
+<section>
+  <div id="conteudo" class="container">
+
+  </div>
+</section>
+<footer class="footer">
+  <div class="content has-text-centered">
+    <p>
+      <strong>Cadastro</strong> <span class="desenvolvedor">by <a class="desenvolvedor" href="https://www.linkedin.com/in/d%C3%A9cio-de-andrade-3481b91a2/" target="_blank">Décio de Andrade</a></span>
+    </p>
+  </div>
+</footer>
+
+<script>
+
+  function render_all(url){
+
+    const getIndex = async () => {
+        const response = await fetch(url, {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json' }
+        })
+
+        const data = await response.json();
+        console.log(data.body);
+
+        switch (url){
+            case '/clientes':
+                criar_table_clientes(data.body.clientes);
+                break;
+            case '/enderecos':
+                criar_table_enderecos(data.body.enderecos);
+                break;
+            case '/responsavels':
+                criar_table_responsaveis(data.body.responsavels);
+                break;
+            case '/contato_telefonicos':
+                criar_table_contatos(data.body.contato_telefonicos);
+                break;
+        }
+    }
+
+    getIndex();
+
+    return false;
+  }
+
+  function delete_element(url){
+      const deleteItem = async () => {
+          const response = await fetch(url, {
+              method: 'delete',
+              headers: { 'Content-Type': 'application/json' }
+          })
+
+          const data = await response.json();
+          console.log(data.body);
+
+          render_all(data.body.url);
+          alert(data.message);
+      }
+
+      deleteItem();
+
+      return false;
+  }
+
+  function show_welcome(){
+      document.getElementById('conteudo').innerHTML = `<h1>Bem-Vindo!</h1>`;
+  }
+
+  function criar_table_enderecos(enderecos){
+      const table_enderecos = `
+        <h1>Endereços</h1>
+
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Logradouro</th>
+              <th>Numero</th>
+              <th>Complemento</th>
+              <th>Bairro</th>
+              <th>Cidade</th>
+              <th>Estado</th>
+              <th>Cep</th>
+              <th colspan="3"></th>
+            </tr>
+          </thead>
+
+          <tbody id="tbody_table_enderecos">
+
+          </tbody>
+        </table>
+
+        <br>
+
+        <a href="/enderecos/new">New Endereços</a>
+      `
+      let corpo_table_enderecos = '';
+
+      enderecos.forEach((endereco) => {
+          corpo_table_enderecos = corpo_table_enderecos + `
+              <tr>
+                <td>${endereco.logradouro}</td>
+                <td>${endereco.numero}</td>
+                <td>${endereco.complemento}</td>
+                <td>${endereco.bairro}</td>
+                <td>${endereco.cidade}</td>
+                <td>${endereco.estado}</td>
+                <td>${endereco.cep}</td>
+                <td><a href="/enderecos/${endereco.id}">Show</a></td>
+                <td><a href="/enderecos/${endereco.id}/edit">Edit</a></td>
+                <td><a onclick="delete_element('/enderecos/${endereco.id}')">Destroy</a></td>
+              </tr>
+      `
+      });
+
+      document.getElementById('conteudo').innerHTML = table_enderecos;
+      document.getElementById('tbody_table_enderecos').innerHTML = corpo_table_enderecos;
+  }
+
+  function criar_table_clientes(clientes){
+      const table_clientes = `
+        <h1>Clientes</h1>
+
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Cnpj</th>
+              <th>Razao social</th>
+              <th>Nome fantasia</th>
+              <th>Inscricao estadual</th>
+              <th>Inscricao municipal</th>
+              <th>Endereco</th>
+              <th colspan="3"></th>
+            </tr>
+          </thead>
+
+          <tbody id="tbody_table_clientes">
+
+          </tbody>
+        </table>
+
+        <br>
+
+        <a href="/clientes/new">New Clientes</a>
+      `
+      let corpo_table_clientes = '';
+
+      clientes.forEach((cliente) => {
+          corpo_table_clientes = corpo_table_clientes + `
+          <tr>
+                <td>${cliente.cnpj}</td>
+                <td>${cliente.razao_social}</td>
+                <td>${cliente.nome_fantasia}</td>
+                <td>${cliente.inscricao_estadual}</td>
+                <td>${cliente.inscricao_municipal}</td>
+                <td>${cliente.endereco_id}</td>
+                <td><a href="/clientes/${cliente.id}">Show</a></td>
+                <td><a href="/clientes/${cliente.id}/edit">Edit</a></td>
+                <td><a onclick="delete_element('/clientes/${cliente.id}')">Destroy</a></td>
+              </tr>
+          `
+      });
+
+      document.getElementById('conteudo').innerHTML = table_clientes;
+      document.getElementById('tbody_table_clientes').innerHTML = corpo_table_clientes;
+  }
+
+  function criar_table_responsaveis(responsaveis){
+      const table_responsaveis = `
+        <h1>Responsavels</h1>
+
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Nome</th>
+              <th>Cargo</th>
+              <th>Email</th>
+              <th>Cliente</th>
+              <th colspan="3"></th>
+            </tr>
+          </thead>
+
+          <tbody id="tbody_table_responsaveis">
+
+          </tbody>
+        </table>
+
+<br>
+
+<a href="/responsavels/new">New Responsavel</a>
+      `
+      let corpo_table_responsaveis = '';
+
+      responsaveis.forEach((responsavel) => {
+          corpo_table_responsaveis = corpo_table_responsaveis + `
+            <tr>
+                <td>${responsavel.nome}</td>
+                <td>${responsavel.cargo}</td>
+                <td>${responsavel.email}</td>
+                <td>${responsavel.cliente_id}</td>
+                <td><a href="/responsavels/${responsavel.id}">Show</a></td>
+                <td><a href="/responsavels/${responsavel.id}/edit">Edit</a></td>
+                <td><a onclick="delete_element('/responsavels/${responsavel.id}')">Destroy</a></td>
+              </tr>
+          `
+      });
+
+      document.getElementById('conteudo').innerHTML = table_responsaveis;
+      document.getElementById('tbody_table_responsaveis').innerHTML = corpo_table_responsaveis;
+  }
+
+  function criar_table_contatos(contatos){
+      const table_contatos = `
+        <h1>Contato Telefonicos</h1>
+
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Telefone fixo</th>
+              <th>Ramal</th>
+              <th>Telefone celular</th>
+              <th>Responsavel</th>
+              <th colspan="3"></th>
+            </tr>
+          </thead>
+
+          <tbody id="tbody_table_contatos">
+
+          </tbody>
+        </table>
+
+        <br>
+
+        <a href="/contato_telefonicos/new">New Contato Telefonico</a>
+
+      `
+      let corpo_table_contatos = '';
+
+      contatos.forEach((contato) => {
+          corpo_table_contatos = corpo_table_contatos + `
+            <tr>
+                <td>${contato.telefone_fixo}</td>
+                <td>${contato.ramal}</td>
+                <td>${contato.telefone_celular}</td>
+                <td>${contato.responsavel_id}</td>
+                <td><a href="/contato_telefonicos/${contato.id}">Show</a></td>
+                <td><a href="/contato_telefonicos/${contato.id}/edit">Edit</a></td>
+                <td><a onclick="delete_element('/contato_telefonicos/${contato.id}')">Destroy</a></td>
+              </tr>
+          `
+      });
+
+      document.getElementById('conteudo').innerHTML = table_contatos;
+      document.getElementById('tbody_table_contatos').innerHTML = corpo_table_contatos;
+  }
+</script>

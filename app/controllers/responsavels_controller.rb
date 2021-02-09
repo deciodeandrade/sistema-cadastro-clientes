@@ -4,7 +4,17 @@ class ResponsavelsController < ApplicationController
   # GET /responsavels
   # GET /responsavels.json
   def index
-    @responsavels = Responsavel.all
+    responsavels = Responsavel.all
+
+    respond_to do |format|
+      msg = {
+        body: {
+          responsavels: responsavels
+        },
+        message: 'Responsável excluído com sucesso!'
+      }
+      format.json  { render :json => msg } # don't do msg.to_json
+    end
   end
 
   # GET /responsavels/1
@@ -55,9 +65,15 @@ class ResponsavelsController < ApplicationController
   # DELETE /responsavels/1.json
   def destroy
     @responsavel.destroy
+
     respond_to do |format|
-      format.html { redirect_to responsavels_url, notice: 'Responsavel was successfully destroyed.' }
-      format.json { head :no_content }
+      msg = {
+        body: {
+          url: '/responsavels',
+        },
+        message: 'Responsável excluído com sucesso!'
+      }
+      format.json  { render :json => msg } # don't do msg.to_json
     end
   end
 

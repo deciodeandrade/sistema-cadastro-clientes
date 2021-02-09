@@ -4,7 +4,16 @@ class ClientesController < ApplicationController
   # GET /clientes
   # GET /clientes.json
   def index
-    @clientes = Cliente.all
+    clientes = Cliente.all
+
+    respond_to do |format|
+      msg = {
+        body: {
+          clientes: clientes
+        }
+      }
+      format.json  { render :json => msg } # don't do msg.to_json
+    end
   end
 
   # GET /clientes/1
@@ -55,9 +64,15 @@ class ClientesController < ApplicationController
   # DELETE /clientes/1.json
   def destroy
     @cliente.destroy
+
     respond_to do |format|
-      format.html { redirect_to clientes_url, notice: 'Cliente was successfully destroyed.' }
-      format.json { head :no_content }
+      msg = {
+        body: {
+          url: '/clientes',
+        },
+        message: 'Cliente excluído com sucesso!'
+      }
+      format.json  { render :json => msg } # don't do msg.to_json
     end
   end
 

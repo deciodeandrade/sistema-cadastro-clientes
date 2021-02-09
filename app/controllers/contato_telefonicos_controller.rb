@@ -4,7 +4,16 @@ class ContatoTelefonicosController < ApplicationController
   # GET /contato_telefonicos
   # GET /contato_telefonicos.json
   def index
-    @contato_telefonicos = ContatoTelefonico.all
+    contato_telefonicos = ContatoTelefonico.all
+
+    respond_to do |format|
+      msg = {
+        body: {
+          contato_telefonicos: contato_telefonicos
+        }
+      }
+      format.json  { render :json => msg } # don't do msg.to_json
+    end
   end
 
   # GET /contato_telefonicos/1
@@ -55,9 +64,15 @@ class ContatoTelefonicosController < ApplicationController
   # DELETE /contato_telefonicos/1.json
   def destroy
     @contato_telefonico.destroy
+
     respond_to do |format|
-      format.html { redirect_to contato_telefonicos_url, notice: 'Contato telefonico was successfully destroyed.' }
-      format.json { head :no_content }
+      msg = {
+        body: {
+          url: '/contato_telefonicos',
+        },
+        message: 'Contato excluído com sucesso!'
+      }
+      format.json  { render :json => msg } # don't do msg.to_json
     end
   end
 

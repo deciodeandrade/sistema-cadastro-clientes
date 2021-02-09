@@ -4,7 +4,17 @@ class EnderecosController < ApplicationController
   # GET /enderecos
   # GET /enderecos.json
   def index
-    @enderecos = Endereco.all
+    enderecos = Endereco.all
+
+    respond_to do |format|
+      msg = {
+        body: {
+          enderecos: enderecos
+        },
+        message: 'Endereço excluído com sucesso!'
+      }
+      format.json  { render :json => msg } # don't do msg.to_json
+    end
   end
 
   # GET /enderecos/1
@@ -55,9 +65,15 @@ class EnderecosController < ApplicationController
   # DELETE /enderecos/1.json
   def destroy
     @endereco.destroy
+
     respond_to do |format|
-      format.html { redirect_to enderecos_url, notice: 'Endereco was successfully destroyed.' }
-      format.json { head :no_content }
+      msg = {
+        body: {
+          url: '/enderecos',
+        },
+        message: 'Endereço excluído com sucesso!'
+      }
+      format.json  { render :json => msg } # don't do msg.to_json
     end
   end
 
